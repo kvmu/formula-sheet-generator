@@ -28,29 +28,57 @@ class FormulaSheet extends Component {
     let test = [];
 
     for (var i=0; i<texList.length; i=i+3) {
-      test.push(
-        <tr>
-          <td>
-            {texList[i]}
-          </td>
-          <td>
-            {texList[i+1]}
-          </td>
-          <td>
-            {texList[i+2]}
-          </td>
-        </tr>
-      )
+      if (!texList[i+1]) {
+        test.push(
+          <div className="row">
+            <div className="triplet">
+              {'$'+texList[i]+'$'}
+            </div>
+            <hr/>
+          </div>
+        )
+      } else if (!texList[i+2]) {
+        test.push(
+          <div className="row">
+            <div className="triplet">
+              {'$'+texList[i]+'$'}
+            </div>
+            <div className="triplet">
+              {'$'+texList[i+1]+'$'}
+            </div>
+            <hr/>
+          </div>
+        )
+      } else {
+        test.push(
+          <div className="row">
+            <div className="triplet">
+              {'$'+texList[i]+'$'}
+            </div>
+            <div className="triplet">
+              {'$'+texList[i+1]+'$'}
+            </div>
+            <div className="triplet">
+              {'$'+texList[i+2]+'$'}
+            </div>
+            <hr/>
+          </div>
+        )
+      }
     }
 
+    let calculatedSize = '500%';
+    let sizeSetting = {fontSize: calculatedSize}
     return (
 
       <page size="A4">
         <h1> Welcome to the Formula Sheet Generator </h1>
-        <table className="equ">
-        {test}
-        </table>
-
+          <div style={{width: '100%'}}>
+            {test}
+          </div>
+          <div style={sizeSetting}>
+            $$5^2 = 4^2 + 3^2$$
+          </div>
       </page>
     );
   };
